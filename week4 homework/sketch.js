@@ -36,7 +36,7 @@ function draw() {
   image(img, mouseX - 50, mouseY - 50);
   
   shot();
-  d=d+1;
+    
 
 }
 
@@ -44,8 +44,15 @@ function shot(){
     fill(255);
     stroke(200);
     this.x=mouseX;
-    this.y=mouseY-50;
-    line(this.x, this.y-d, this.x, this.y-20-d);
+    this.y=mouseY-30;
+    if(d<15){
+        d=d+1;
+        line(this.x, this.y-d, this.x, this.y-10-d);
+             }else{
+                 d=5;
+             }
+    
+    //line(this.x, this.y-d, this.x, this.y-20-d);
     /*if (keyIsPressed == true){
         this.d=this.d++;
         line(this.x, this.y+this.d, this.x, this.y-20+this.d);
