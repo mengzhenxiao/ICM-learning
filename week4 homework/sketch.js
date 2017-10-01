@@ -1,5 +1,14 @@
 var star = [];
 var z;
+var img;
+var d=5;
+
+
+//loadimage
+function preload() {
+  img = loadImage("spaceship1.png");
+}
+
 
 function setup() {
   createCanvas(800, 600)
@@ -12,13 +21,39 @@ function setup() {
 
 function draw() {
   background(0);
+
+  push();
   translate(width / 2, height / 2);
-    
+
   //loop the star show function
   for (var i = 0; i < star.length; i++) {
     star[i].show();
   }
+  pop();
+
+
+  //image
+  image(img, mouseX - 50, mouseY - 50);
+  
+  shot();
+  d=d+1;
+
 }
+
+function shot(){
+    fill(255);
+    stroke(200);
+    this.x=mouseX;
+    this.y=mouseY-50;
+    line(this.x, this.y-d, this.x, this.y-20-d);
+    /*if (keyIsPressed == true){
+        this.d=this.d++;
+        line(this.x, this.y+this.d, this.x, this.y-20+this.d);
+        
+    }*/
+  
+}
+   
 
 //the whole star funtion
 function Star() {
