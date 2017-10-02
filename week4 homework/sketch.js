@@ -7,6 +7,7 @@ var d=8;
 var blue;
 
 var a;
+var b;
 
 
 //loadimage
@@ -41,12 +42,18 @@ function draw() {
     
   //spaceship
   image(img, mouseX - 50, mouseY - 50);
-  a=map(mouseY-300,0,300,10,40);
+  a=map(mouseY-300,0,300,10,50);
+  
+    
   //make the spaceship open fire
-  if(keyIsPressed==true){
-      
-  shot(mouseX,mouseY-10);
-  shot(mouseX,mouseY-10-a);
+  if(keyIsPressed==true){   
+      if(mouseY<=width/2-100){
+          b=-60;
+      }else{
+          b=10;
+      }
+  shot(mouseX,mouseY-b);
+  shot(mouseX,mouseY-b-a);
   } 
 
   intext();
