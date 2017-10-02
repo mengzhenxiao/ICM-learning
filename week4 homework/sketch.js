@@ -1,7 +1,8 @@
 var star = [];
 var z;
 var img;
-var d=5;
+var d=8;
+var blue;
 
 
 //loadimage
@@ -20,45 +21,48 @@ function setup() {
 
 
 function draw() {
-  background(0);
+  blue=map(mouseY, 0,height,54,14);
+  background(26,28,blue);
 
   push();
   translate(width / 2, height / 2);
-
   //loop the star show function
   for (var i = 0; i < star.length; i++) {
     star[i].show();
   }
   pop();
 
-
-  //image
+  //spaceship
   image(img, mouseX - 50, mouseY - 50);
   
-  shot();
-    
+  //make the spaceship open fire
+  if(keyIsPressed==true){
+  shot(mouseX,mouseY-10);
+  shot(mouseX,mouseY-30);
+  } 
 
+  intext();
+ 
 }
 
-function shot(){
+function intext(){
+    fill(255,100)
+    noStroke();
+    textSize(32);
+text("Press A Key To Open Fire", 200, 500);
+}
+
+
+
+function shot(x,y){
     fill(255);
     stroke(200);
-    this.x=mouseX;
-    this.y=mouseY-30;
-    if(d<15){
+    if(d<20){
         d=d+1;
-        line(this.x, this.y-d, this.x, this.y-10-d);
+        line(x, y-d, x, y-5-d);
              }else{
                  d=5;
              }
-    
-    //line(this.x, this.y-d, this.x, this.y-20-d);
-    /*if (keyIsPressed == true){
-        this.d=this.d++;
-        line(this.x, this.y+this.d, this.x, this.y-20+this.d);
-        
-    }*/
-  
 }
    
 
