@@ -1,24 +1,18 @@
-var star = [];
-//var otherstar = [];
-var z;
-var img;
-var img2;
-var d=8;
-var blue;
+var star = [];//star array
+var img;//image of the spaceship
+var offset=8;//offset of the Y position of each shot
 
-var a;
-var b;
 
 
 //loadimage
 function preload() {
-  img = loadImage("spaceship1.png");
-  img2 = loadImage("stars.png");
+img = loadImage("spaceship1.png");
 }
 
 
 function setup() {
   createCanvas(800, 600)
+    
   for (var i = 0; i < 800; i++) {
     //make a star array, and the array is a star function.
     star[i] = new Star();
@@ -28,8 +22,8 @@ function setup() {
 
 function draw() {
   //background change
-  blue=map(mouseY, 0,height,54,14);
-  background(26,28,blue);
+  var blue = map(mouseY, 0, height, 54, 14);
+  background(26, 28, blue);
 
   //call the star show function
   push();
@@ -39,53 +33,69 @@ function draw() {
   }
   pop();
 
-    
+
   //spaceship
-  image(img, mouseX - 50, mouseY - 50);
-  a=map(mouseY-300,0,300,10,50);
-  
-    
-  //make the spaceship open fire
-  if(keyIsPressed==true){   
-      if(mouseY<=width/2-100){
-          b=-60;
-      }else{
-          b=10;
-      }
-  shot(mouseX,mouseY-b);
-  shot(mouseX,mouseY-b-a);
-  } 
+  spaceship();
 
+  //text
   intext();
- 
+
+  //openfire
+  openfire();
+
 }
 
 
 
 
-function intext(){
-    fill(255,100)
-    noStroke();
-    textSize(32);
-text("Press A Key To Open Fire", 200, 500);
+
+
+function intext() {
+  fill(255, 100)
+  noStroke();
+  textSize(32);
+  text("Press A Key To Open Fire", 200, 500);
 }
 
 
 
-function shot(x,y){
-    this.l=map(mouseY-300,0,300,5,30);
-    stroke(255);
-    strokeWeight(2);
-    if(d<30){
-        d=d+1;
-        line(x, y-d, x, y-this.l-d);
-             }else {   
-                 d=5;
-             }
+function spaceship() {
+  image(img, mouseX - 50, mouseY - 50);
 }
-   
 
-//the whole star funtion
+
+
+function shot(x, y) {
+  this.l = map(mouseY - 300, 0, 300, 5, 30);//the length of each shot
+  stroke(255);
+  strokeWeight(2);
+
+  if (offset < 30) {
+    offset = offset + 1;
+  } else {
+    offset = 8;
+  }
+    line(x, y - offset, x, y - this.l - offset);
+}
+
+
+function openfire() {
+  this.a = map(mouseY - 300, 0, 300, 10, 50); //distance between the two shots
+
+  //call the shot funtion
+  if (keyIsPressed == true) {
+    if (mouseY <= width / 2 - 100) {
+      this.b = -60;
+    } else {
+      this.b = 10;
+    }
+    shot(mouseX, mouseY - this.b);
+    shot(mouseX, mouseY - this.b - this.a);
+  }
+}
+
+
+
 function Star() {
   //make main variables
   this.x = random(-width, width);
@@ -112,7 +122,5 @@ function Star() {
     this.sy = map(this.y / this.z, 0, 1, 0, height);
     this.r = map(this.z, 0, width, 8, 0);
     ellipse(this.sx, this.sy, this.r, this.r);
-    //image(img2, this.sx, this.sy);
   }
 }
-
