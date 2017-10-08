@@ -1,35 +1,37 @@
-let ball;
-let ball2;
+let ball = [];
 
 function setup() {
   createCanvas(400, 400);
-  ball = new Ball(200, 200);
-  ball2 = new Ball(300, 300);
+  for (let i = 0; i < 1000; i++)
+    ball[i] = new Ball();
 }
 
 
 function draw() {
-  background(255);
-  ball.show();
-  ball.move();
-  ball2.show();
-  ball2.move();
-
+  background(0);
+  for (let i = 0; i < ball.length; i++) {
+    ball[i].show();
+    ball[i].move();
+  }
 }
 
 
+
 class Ball {
-  constructor(x, y) {
-    this.x = x;
-    this.y = y;
+  constructor() {
+    this.x = random(0, width);
+    this.y = random(0, height);
+    this.r = random(100, 200);
+    this.g = random(100, 200);
+    this.a = random(100, 200);
     this.speed = 0;
     this.gravity = 0.1;
   }
 
   show() {
-    fill(175);
-    stroke(0);
-    ellipse(this.x, this.y, 10, 10);
+    strokeWeight(2);
+    stroke(this.r, this.g, 200, this.a);
+    line(this.x, this.y, this.x, this.y + 10);
   }
 
   move() {
