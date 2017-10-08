@@ -1,8 +1,10 @@
 let ball;
+let ball2;
 
 function setup() {
   createCanvas(400, 400);
   ball = new Ball(200, 200);
+  ball2 = new Ball(300, 300);
 }
 
 
@@ -10,6 +12,8 @@ function draw() {
   background(255);
   ball.show();
   ball.move();
+  ball2.show();
+  ball2.move();
 
 }
 
