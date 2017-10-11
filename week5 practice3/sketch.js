@@ -4,7 +4,7 @@ function setup() {
   createCanvas(400, 400);
 
   for (let i = 0; i < 10; i++) {
-    balls[i] = new Ball(random(width), random(height), 40);
+    balls[i] = new Ball(random(width), random(height), 80);
   }
 }
 
@@ -19,6 +19,10 @@ function draw() {
         balls[j].change_1();
         balls[i].change_1();
       }
+        if (j != i && balls[j].intersects_2(balls[i])) {
+        balls[j].change_2();
+        balls[i].change_2();
+      }
     }
   }
 }
@@ -30,10 +34,11 @@ class Ball {
     this.x = x;
     this.y = y;
     this.r = r;
+    this.col = (255,200);
   }
     
   show() {
-    fill(255);
+    fill(this.col);
     noStroke();
     ellipse(this.x, this.y, this.r, this.r);
   }
@@ -45,14 +50,30 @@ class Ball {
 
   intersects_1(other) {
     let d = dist(this.x, this.y, other.x, other.y);
-    if (d <= 40) {
+    if (50<d&&d <= 80) {
       return true;
     } else {
       return false;
     }
   }
 
+   intersects_2(other) {
+    let d = dist(this.x, this.y, other.x, other.y);
+    if (d <= 50) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+    
   change_1() {
-    this.r = 20;
+    this.r = 50;
+    this.col = color(131,194,213,200);
+    
+  }
+    
+  change_2(){
+      this.r=20;
+    this.col = color(216,180,229,200);
   }
 }
