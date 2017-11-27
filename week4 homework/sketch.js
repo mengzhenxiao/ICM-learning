@@ -2,8 +2,6 @@ var star = [];//star array
 var img;//image of the spaceship
 var offset=8;//offset of the Y position of each shot
 
-
-
 //loadimage
 function preload() {
 img = loadImage("spaceship1.png");
@@ -17,8 +15,8 @@ function setup() {
     //make a star array, and the array is a star function.
     star[i] = new Star();
   }
-}
-
+}   
+     
 
 function draw() {
   //background change
@@ -33,7 +31,6 @@ function draw() {
   }
   pop();
 
-
   //spaceship
   spaceship();
 
@@ -42,12 +39,7 @@ function draw() {
 
   //openfire
   openfire();
-
 }
-
-
-
-
 
 
 function intext() {
@@ -96,14 +88,17 @@ function openfire() {
 
 
 
-function Star() {
+class Star {
   //make main variables
+    
+    constructor(){
   this.x = random(-width, width);
   this.y = random(-height, height);
   this.z = random(width);
+    }
 
   //this funtion draw the stars and make them move
-  this.show = function() {
+  show () {
     //make the speed change with the mouseX
     this.speed = map(mouseY, 0, height, 30, 5);
     this.z = this.z - this.speed;
@@ -121,6 +116,18 @@ function Star() {
     this.sx = map(this.x / this.z, 0, 1, 0, width);
     this.sy = map(this.y / this.z, 0, 1, 0, height);
     this.r = map(this.z, 0, width, 8, 0);
+      
+    //make a crash
+      /*for(var p=0; p < star.length; p++;){
+          if(mouseX == this.sx){
+          fill(100,100,100);
+          
+      }else{
+          fill(255);
+      }
+      }*/
+      
     ellipse(this.sx, this.sy, this.r, this.r);
   }
 }
+
